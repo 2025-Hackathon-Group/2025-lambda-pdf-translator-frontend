@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navigation from '../components/Navigation';
 import './Home.css';
 
 function Home() {
@@ -7,6 +8,7 @@ function Home() {
 
   return (
     <div className="page-container">
+      <Navigation />
       <main className="main-content">
         <header className="hero-section">
           <h1 className="hero-title">PDF AI Translator</h1>

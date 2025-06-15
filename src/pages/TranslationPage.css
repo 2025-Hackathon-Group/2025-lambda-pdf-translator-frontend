@@ -14,8 +14,11 @@
 .translation-page {
   display: grid;
   grid-template-columns: 250px 1fr 350px;
-  height: 100vh;
+  min-height: calc(100vh - 72px);
+  margin-top: 72px; /* Add space for navbar */
   background: var(--bg-light);
+  gap: 1rem;
+  padding: 1rem;
 }
 
 /* Left Sidebar Styles */
@@ -39,6 +42,10 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background: var(--white);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px var(--shadow);
 }
 
 .file-item {
@@ -123,6 +130,15 @@
   box-shadow: 0 2px 4px var(--shadow);
 }
 
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+}
+
 /* Right Sidebar Styles */
 .chat-sidebar {
   background: var(--white);
@@ -133,4 +149,22 @@
 
 .hidden {
   display: none;
+}
+
+.main-content {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-section {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px var(--shadow);
 }

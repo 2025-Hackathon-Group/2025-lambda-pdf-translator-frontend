@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
+import Navigation from '../components/Navigation';
 import ChatBox from '../components/ChatBox';
 import './TranslationPage.css';
 
@@ -52,67 +53,70 @@ function TranslationPage() {
   };
 
   return (
-    <div className="translation-page">
-      {/* Left Sidebar - File History */}
-      <aside className="file-sidebar">
-        <h2 className="sidebar-title">Recent Files</h2>
-        <div className="file-list">
-          {['Document1.pdf', 'Document2.pdf', 'Document3.pdf'].map((file, index) => (
-            <div key={index} className="file-item">
-              <span className="file-icon">📄</span>
-              <span className="file-name">{file}</span>
-            </div>
-          ))}
-        </div>
-      </aside>
+    <>
+      <Navigation />
+      <div className="translation-page">
+        {/* Left Sidebar - File History */}
+        <aside className="file-sidebar">
+          <h2 className="sidebar-title">Recent Files</h2>
+          <div className="file-list">
+            {['Document1.pdf', 'Document2.pdf', 'Document3.pdf'].map((file, index) => (
+              <div key={index} className="file-item">
+                <span className="file-icon">📄</span>
+                <span className="file-name">{file}</span>
+              </div>
+            ))}
+          </div>
+        </aside>
 
-      {/* Middle Section - PDF Preview */}
-      <main className="pdf-preview">
-        <div className="preview-header">
-          <h2>Translated Document</h2>
-          <Select
-            options={languageOptions}
-            value={targetLanguage}
-            onChange={setTargetLanguage}
-            placeholder="Select target language..."
-            styles={customSelectStyles}
-            className="language-select"
-            isSearchable={true}
-          />
-        </div>
-        <div className="preview-content">
-          {selectedFile ? (
-            <div className="pdf-viewer">
-              {/* PDF Viewer Component will go here */}
-              <p>PDF Preview: {selectedFile.name}</p>
-            </div>
-          ) : (
-            <div className="empty-state">
-              <span className="empty-icon">📄</span>
-              <p>Upload a PDF to start translating</p>
-              <input
-                type="file"
-                accept=".pdf"
-                id="pdf-upload"
-                className="hidden"
-                onChange={handleFileUpload}
-              />
-              <label 
-                htmlFor="pdf-upload" 
-                className="upload-button"
-              >
-                Choose PDF File
-              </label>
-            </div>
-          )}
-        </div>
-      </main>
+        {/* Middle Section - PDF Preview */}
+        <main className="pdf-preview">
+          <div className="preview-header">
+            <h2>Translated Document</h2>
+            <Select
+              options={languageOptions}
+              value={targetLanguage}
+              onChange={setTargetLanguage}
+              placeholder="Select target language..."
+              styles={customSelectStyles}
+              className="language-select"
+              isSearchable={true}
+            />
+          </div>
+          <div className="preview-content">
+            {selectedFile ? (
+              <div className="pdf-viewer">
+                {/* PDF Viewer Component will go here */}
+                <p>PDF Preview: {selectedFile.name}</p>
+              </div>
+            ) : (
+              <div className="empty-state">
+                <span className="empty-icon">📄</span>
+                <p>Upload a PDF to start translating</p>
+                <input
+                  type="file"
+                  accept=".pdf"
+                  id="pdf-upload"
+                  className="hidden"
+                  onChange={handleFileUpload}
+                />
+                <label 
+                  htmlFor="pdf-upload" 
+                  className="upload-button"
+                >
+                  Choose PDF File
+                </label>
+              </div>
+            )}
+          </div>
+        </main>
 
-      {/* Right Section - Chat */}
-      <aside className="chat-sidebar">
-        <ChatBox />
-      </aside>
-    </div>
+        {/* Right Section - Chat */}
+        <aside className="chat-sidebar">
+          <ChatBox />
+        </aside>
+      </div>
+    </>
   );
 }
 
