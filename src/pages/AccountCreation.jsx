@@ -12,7 +12,7 @@ function AccountCreation() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission
+        // Needs backend API call for user registration
     };
 
     return (
