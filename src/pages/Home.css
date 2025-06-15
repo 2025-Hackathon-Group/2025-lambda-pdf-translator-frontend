@@ -12,16 +12,22 @@
 }
 
 .page-container {
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 72px);
+  margin-top: 72px;
+  padding: 2rem;
+  background-color: var(--primary);
   width: 100%;
-  background: var(--bg-grad);
 }
 
-.main-content {
+/* Remove or comment out the .main-content class */
+/* .main-content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-}
+} */
 
 .hero-section {
   text-align: center;
@@ -69,9 +75,29 @@
 /* Features Section */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
   margin: 4rem 0;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem 0;
+}
+
+.feature {
+  flex: 1;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .feature-card {
@@ -113,7 +139,6 @@
   animation: slideUp 0.8s ease-out;
 }
 
-
 .cta-button {
   margin-top: 2rem;
   padding: 1rem 2rem;
@@ -138,4 +163,15 @@
 .cta-button:active {
   transform: translateY(0);
   box-shadow: 0 4px 6px var(--shadow);
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 4rem;
+  max-width: 600px;
 }
