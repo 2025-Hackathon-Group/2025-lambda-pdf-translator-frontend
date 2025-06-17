@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; 
+import { useAuth } from '../context/AuthContext';
 import './Navigation.css';
 
-function Navigation() {
-  const { user, logout } = useAuth(); // Needs backend logout functionality
+const Navigation: React.FC = () => {
+  const { user, logout } = useAuth(); // Needs baackend logout integration
 
   return (
     <header className="navigation">

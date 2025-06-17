@@ -3,9 +3,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255); /* Semi-transparent white */
-  backdrop-filter: blur(8px); /* Adds frosted glass effect */
-  -webkit-backdrop-filter: blur(8px); /* For Safari support */
+  background: rgba(255, 255, 255); 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }

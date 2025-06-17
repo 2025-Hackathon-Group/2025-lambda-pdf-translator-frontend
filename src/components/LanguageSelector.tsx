@@ -1,6 +1,11 @@
 import React from 'react';
 
-const LanguageSelector = () => {
+interface LanguageSelectorProps {
+  onChange?: (language: string) => void;
+  value?: string;
+}
+
+const LanguageSelector: React.FC<LanguageSelectorProps> = ({ onChange, value }) => {
   return (
     <div className="flex flex-col space-y-2">
       <label htmlFor="language" className="text-gray-700 font-medium">
@@ -8,6 +13,8 @@ const LanguageSelector = () => {
       </label>
       <select 
         id="language"
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
         className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
       >
         <option value="en">English</option>

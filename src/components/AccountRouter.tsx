@@ -3,13 +3,12 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Login from '../pages/Login';
 import AccountCreation from '../pages/AccountCreation';
-import AccountSettings from '../pages/AccountSettings';
 
-function AccountRouter() {
+const AccountRouter: React.FC = () => {
   const { user } = useAuth();
 
   if (user) {
-    return <AccountSettings />;
+    return <div>Account Settings</div>; // Placeholder until AccountSettings is created
   }
 
   return (
@@ -19,6 +18,6 @@ function AccountRouter() {
       <Route path="/" element={<Navigate to="login" />} />
     </Routes>
   );
-}
+};
 
 export default AccountRouter;
