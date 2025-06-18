@@ -12,4 +12,5 @@ RUN npm ci
 
 # Copy frontend source and build
 COPY . .
-RUN npm run dev
+
+CMD ["npm", "run", "dev"]
