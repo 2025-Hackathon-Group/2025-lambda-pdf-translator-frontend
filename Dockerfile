@@ -13,4 +13,6 @@ RUN npm ci
 # Copy frontend source and build
 COPY . .
 
+EXPOSE 5173
+
 CMD ["npm", "run", "dev"]
