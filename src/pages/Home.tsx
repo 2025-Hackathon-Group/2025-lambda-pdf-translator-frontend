@@ -31,7 +31,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="page-container">
-      <h1 className="hero-title">PDF AI Translator</h1>
+      <h1 className="hero-title">PDF AI Translatora</h1>
       <p className="hero-description">
         Transform your documents instantly with AI-powered translation.
       </p>
