@@ -1,53 +1,63 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { unstable_batchedUpdates } from 'react-dom';
+import { createContext, useContext, useEffect, useState } from "react"
+import Cookies from "js-cookie"
+
+import type { AuthResponse, User } from "@/types/auth"
+import api from "@/lib/api"
 
 interface AuthContextType {
-  user: User | null;
-  login: (userData: User) => void;
-  logout: () => void;
+  user: User | null
+  token: string | null
+  login: (data: AuthResponse) => void
+  logout: () => void
+  isLoading: boolean
 }
 
-interface User {
-  id?: string;
-  email: string;
-  name?: string;
-}
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null)
+  const [token, setToken] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
-const AuthContext = createContext<AuthContextType | null>(null);
+  useEffect(() => {
+    const storedToken = Cookies.get("token")
+    const storedUser = Cookies.get("user")
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+    if (storedToken && storedUser) {
+      setToken(storedToken)
+      setUser(JSON.parse(storedUser))
+      api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`
+    }
+    setIsLoading(false)
+  }, [])
 
-  const login = (userData: User) => {
-    unstable_batchedUpdates(() => {
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-    });
-  }; 
-// Will need backend integration for actual authentication
+  const login = (data: AuthResponse) => {
+    setToken(data.token)
+    setUser(data.user)
+    Cookies.set("token", data.token, { expires: 7 })
+    Cookies.set("user", JSON.stringify(data.user), { expires: 7 })
+    api.defaults.headers.common["Authorization"] = `Bearer ${data.token}`
+  }
 
   const logout = () => {
-    unstable_batchedUpdates(() => {
-      setUser(null);
-      localStorage.removeItem('user');
-    });
-  };
+    setToken(null)
+    setUser(null)
+    Cookies.remove("token")
+    Cookies.remove("user")
+    delete api.defaults.headers.common["Authorization"]
+  }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
-  );
-};
+  )
+}
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+export function useAuth() {
+  const context = useContext(AuthContext)
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthProvider")
   }
-  return context;
-};
+  return context
+}

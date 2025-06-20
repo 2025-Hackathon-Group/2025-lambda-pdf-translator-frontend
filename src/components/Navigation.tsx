@@ -21,8 +21,8 @@ const Navigation: React.FC = () => {
           <Link to="/translate" className="nav-link">Translate</Link>
           {!user ? (
             <>
-              <Link to="/account/login" className="nav-link">Login</Link>
-              <Link to="/account/register" className="nav-link">Register</Link>
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/register" className="nav-link">Register</Link>
             </>
           ) : (
             <div className="account-dropdown">
