@@ -1,9 +1,20 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: path.resolve(__dirname, 'node_modules/pdfjs-dist/build/pdf.worker.mjs'),
+          dest: '.'
+        }
+      ]
+    })
+  ],
   resolve: {
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
     alias: {
@@ -13,6 +24,21 @@ export default defineConfig({
   server: {
     host: true,
     port: 5173,
-    allowedHosts: true
+    allowedHosts: true,
+    fs: {
+      allow: ['..']
+    }
+  },
+  optimizeDeps: {
+    include: ['react-pdf'],
+    exclude: ['pdfjs-dist']
+  },
+  build: {
+    rollupOptions: {
+      external: ['canvas']
+    }
+  },
+  define: {
+    global: 'globalThis',
   }
 });

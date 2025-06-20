@@ -11,9 +11,11 @@
 .nav-container {
   display: flex;
   align-items: center;
-  padding: 1rem 2rem;
-  max-width: 1400px;
+  justify-content: space-between; /* This pushes the logo and links to opposite ends */
+  padding: 1rem 3rem; /* Adjust horizontal padding to control edge spacing */
+  width: 100%; /* Make the container span the full viewport width */
   margin: 0 auto;
+  box-sizing: border-box; /* Ensures padding is included in the total width */
 }
 
 .nav-logo {
@@ -56,9 +58,8 @@
 }
 
 .nav-links {
-  flex: 1;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
   gap: 2rem;
 }
 
