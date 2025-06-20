@@ -4,26 +4,30 @@ import { useAuth } from '../context/AuthContext';
 import './Navigation.css';
 
 const Navigation: React.FC = () => {
-  const { user, logout } = useAuth(); // Needs baackend logout integration
+  const { user, logout } = useAuth(); // Needs backend logout integration
 
   return (
     <header className="navigation">
       <div className="nav-container">
         <Link to="/" className="nav-logo">
-          <span>🌐 PDF Translator</span>
+          <span className="logo-icon">📄</span>
+          <span className="logo-text">
+            <span className="logo-primary">PDF</span>
+            <span className="logo-secondary">Translator</span>
+          </span>
         </Link>
         <nav className="nav-links">
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/translate" className="nav-link">Translate</Link>
-          {user ? (
-            <div className="account-dropdown">
-              <Link to="/account" className="nav-link">My Account</Link>
-              <button onClick={logout} className="nav-link">Logout</button>
-            </div>
-          ) : (
-            <div className="auth-links">
+          {!user ? (
+            <>
               <Link to="/account/login" className="nav-link">Login</Link>
               <Link to="/account/register" className="nav-link">Register</Link>
+            </>
+          ) : (
+            <div className="account-dropdown">
+              <Link to="/account" className="nav-link">My Account</Link>
+              <button onClick={logout} className="nav-link logout-btn">Logout</button>
             </div>
           )}
         </nav>

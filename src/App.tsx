@@ -4,7 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import TranslationPage from './pages/TranslationPage';
-import AccountCreation from './pages/AccountCreation';
+import AccountRouter from './components/AccountRouter';
 
 const App: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/translate" element={<TranslationPage />} />
-          <Route path="/account" element={<AccountCreation />} />
+          <Route path="/account/*" element={<AccountRouter />} />
         </Routes>
       </Router>
     </AuthProvider>
